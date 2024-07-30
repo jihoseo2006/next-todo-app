@@ -1,4 +1,3 @@
-import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
 import {
   MdOutlineCheckBox,
   MdOutlineCheckBoxOutlineBlank,
@@ -10,7 +9,7 @@ import {
   TodoState,
   toggleTodoDone,
   toggleTodoEdit,
-} from "../../redux/slice/todoListSlice";
+} from "../redux/slice/todoListSlice";
 import TodoEdit from "./TodoEdit";
 import styled from "styled-components";
 
@@ -22,6 +21,7 @@ interface Props {
 const TodoItem = ({ todo }: Props) => {
   const { id, text, done, edit } = todo;
   const dispatch = useAppDispatch();
+  // item쪽도 피드백이 있었던거 같은데.....
 
   return (
     <>
@@ -47,9 +47,6 @@ const TodoItem = ({ todo }: Props) => {
 
 export default TodoItem
 
-const Button = styled.button`
-  
-`
 
 
 

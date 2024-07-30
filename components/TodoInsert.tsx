@@ -7,15 +7,8 @@ const TodoInsert = () => {
   const todoId = useRef(0);
 
   const textRef = useRef<HTMLInputElement>(null);
-  const [text, setText] = useState<string>("")
+  const [text, setText] = useState<string>("");
   const dispatch = useAppDispatch();
-
-  const changeInput = (e: any) => {
-    const {
-      target: { value },
-    } = e;
-    setText(value);
-  }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +35,7 @@ const TodoInsert = () => {
     // form과 input를 같이 사용하는 이유? form onSubmit가 enter 입력을 지원하기 때문!
     // 당연히 쓰는거 같지만 강의든 예제든 왜 이걸 둘이 쓰지? 싶은 것들은 한번씩 검색해보면서 이유를 찾아보자.
     <form onSubmit={onSubmit}>
-      <input type="text" value={text} onChange={changeInput} ref={textRef} required/>
+      <input type="text" value={text} onChange={(e) => setText(e.target.value)} ref={textRef} required/>
     </form>
   )
 }
