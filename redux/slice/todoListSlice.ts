@@ -17,6 +17,8 @@ const todoSlice = createSlice({
     addTodo(state, action: PayloadAction<TodoState>){
       state.push(action.payload);
     },
+    // map 사용이 습관이 되지 말자, slice나 filter, sum 메소드 등으로 궅이 map으로 싹 다 조회한 다음에 굴릴 필요 없다.
+    // 상황에 맞게 효율적인거 사용하자!
     editTodo(state, action: PayloadAction<TodoState>){
       state.map((todo: any) => {
         if(todo.id === action.payload.id) {

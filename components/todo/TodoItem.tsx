@@ -12,6 +12,7 @@ import {
   toggleTodoEdit,
 } from "../../redux/slice/todoListSlice";
 import TodoEdit from "./TodoEdit";
+import styled from "styled-components";
 
 interface Props {
   todo: TodoState
@@ -21,9 +22,9 @@ interface Props {
 const TodoItem = ({ todo }: Props) => {
   const { id, text, done, edit } = todo;
   const dispatch = useAppDispatch();
-  
+
   return (
-    <div>
+    <>
       {edit ? (
         <TodoEdit todo={todo} />
       ) : (
@@ -33,15 +34,22 @@ const TodoItem = ({ todo }: Props) => {
           </span>
           <em onClick={() => dispatch(toggleTodoDone(id))}>{text}</em>
           <button onClick={() => dispatch(toggleTodoEdit(id))}>
-            <FaPencilAlt size="15" />
+            🛠️
           </button>
           <button onClick={() => dispatch(delTodo(id))}>
-            <FaRegTrashAlt color="rgb(175,169,169)" size="15" />
+            🗑️
           </button>
         </li>
       )}
-    </div>
+    </>
   );
 }
 
 export default TodoItem
+
+const Button = styled.button`
+  
+`
+
+
+
