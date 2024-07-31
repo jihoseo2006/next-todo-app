@@ -11,7 +11,6 @@ import {
   toggleTodoEdit,
 } from "../redux/slice/todoListSlice";
 import TodoEdit from "./TodoEdit";
-import styled from "styled-components";
 
 interface Props {
   todo: TodoState

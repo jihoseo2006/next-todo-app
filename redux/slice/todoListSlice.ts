@@ -20,28 +20,43 @@ const todoSlice = createSlice({
     // map 사용이 습관이 되지 말자, slice나 filter, sum 메소드 등으로 궅이 map으로 싹 다 조회한 다음에 굴릴 필요 없다.
     // 상황에 맞게 효율적인거 사용하자!
     editTodo(state, action: PayloadAction<TodoState>){
-      state.map((todo: any) => {
-        if(todo.id === action.payload.id) {
-          todo.text = action.payload.text;
-        }
-      });
+      // state.map((todo: any) => {
+      //   if(todo.id === action.payload.id) {
+      //     todo.text = action.payload.text;
+      //   }
+      // }); //find로 수정
+      const listToEdit = state.find(todo => todo.id === action.payload.id);
+      if (listToEdit) {
+        listToEdit.text = action.payload.text;
+      }
+
     },
     delTodo(state, action: PayloadAction<number>) {
       return (state = state.filter((todo: any) =>  todo.id !== action.payload));
     },
     toggleTodoEdit(state, action: PayloadAction<number>)  {
-      state.map((todo: any) => {
-        if(todo.id === action.payload) {
-          todo.edit = ! todo.edit;
-        }
-      });
+      // state.map((todo: any) => {
+      //   if(todo.id === action.payload) {
+      //     todo.edit = ! todo.edit;
+      //   }
+      // });
+      const toggleListToEdit = state.find(todo => todo.id === action.payload);
+      if(toggleListToEdit) {
+        toggleListToEdit.edit = !toggleListToEdit.edit
+      }
+
     },
     toggleTodoDone(state, action: PayloadAction<number>)  {
-      state.map((todo: any) => {
-        if(todo.id === action.payload) {
-          todo.done = ! todo.done;
-        }
-      });
+      // state.map((todo: any) => {
+      //   if(todo.id === action.payload) {
+      //     todo.done = ! todo.done;
+      //   }
+      // });
+
+      const toggleListDone = state.find(todo => todo.id === action.payload);
+      if(toggleListDone) {
+        toggleListDone.done = !toggleListDone.done
+      }
     }
 
   }

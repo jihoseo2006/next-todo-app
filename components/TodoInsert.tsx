@@ -1,7 +1,6 @@
 import { useAppDispatch } from '@/redux/hooks';
 import { addTodo } from '@/redux/slice/todoListSlice';
 import React, { useRef, useState } from 'react'
-import styled from 'styled-components';
 
 const TodoInsert = () => {
   const todoId = useRef(0);
