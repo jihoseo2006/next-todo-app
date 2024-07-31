@@ -20,7 +20,6 @@ interface Props {
 const TodoItem = ({ todo }: Props) => {
   const { id, text, done, edit } = todo;
   const dispatch = useAppDispatch();
-  // item쪽도 피드백이 있었던거 같은데.....
 
   return (
     <>

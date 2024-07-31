@@ -6,8 +6,10 @@ import { parseCookies } from 'nookies';
 import { useDispatch } from 'react-redux';
 import { addTodo, TodoState } from '../redux/slice/todoListSlice'; // Todo 액션 임포트
 import store from '../redux/store'; // Redux 스토어 초기화 함수
+import { GetServerSidePropsContext } from 'next'; //context 타입 지정용
 
-const Todo = ({ initialTodos }: any) => {
+// any 사용 지양해야함
+const Todo = ({ initialTodos }: {initialTodos: TodoState[]}) => {
   const dispatch = useDispatch();
 
   // 초기 상태를 Redux 스토어에 추가
@@ -30,7 +32,7 @@ const Todo = ({ initialTodos }: any) => {
 };
 
 // 서버 사이드에서 쿠키에서 초기 상태 가져오기
-export async function getServerSideProps(context : any) {
+export async function getServerSideProps(context : GetServerSidePropsContext) {
   const cookies = parseCookies(context);
   const initialTodos = cookies.todos ? JSON.parse(cookies.todos) : [];
 
