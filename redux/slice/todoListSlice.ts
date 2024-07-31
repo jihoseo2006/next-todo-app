@@ -1,4 +1,5 @@
 import { createSlice, CreateSliceOptions, PayloadAction } from "@reduxjs/toolkit";
+import nookies from 'nookies'
 
 
 
@@ -17,6 +18,7 @@ const todoSlice = createSlice({
   reducers: {
     addTodo(state, action: PayloadAction<TodoState>){
       state.push(action.payload);
+      nookies.set(null, 'todos', JSON.stringify(state), { path: '/' }); 
     },
     // map 사용이 습관이 되지 말자, slice나 filter, sum 메소드 등으로 궅이 map으로 싹 다 조회한 다음에 굴릴 필요 없다.
     // 상황에 맞게 효율적인거 사용하자!
@@ -29,11 +31,16 @@ const todoSlice = createSlice({
       const listToEdit = state.find(todo => todo.id === action.payload.id);
       if (listToEdit) {
         listToEdit.text = action.payload.text;
+        nookies.set(null, 'todos', JSON.stringify(state), { path: '/' }); 
+
       }
 
     },
     delTodo(state, action: PayloadAction<number>) {
-      return (state = state.filter((todo: any) =>  todo.id !== action.payload));
+
+      const newState = (state = state.filter((todo: any) =>  todo.id !== action.payload));
+      nookies.set(null, 'todos', JSON.stringify(newState), { path: '/' }); 
+      return newState;
     },
     toggleTodoEdit(state, action: PayloadAction<number>)  {
       // state.map((todo: any) => {
@@ -43,7 +50,8 @@ const todoSlice = createSlice({
       // });
       const toggleListToEdit = state.find(todo => todo.id === action.payload);
       if(toggleListToEdit) {
-        toggleListToEdit.edit = !toggleListToEdit.edit
+        toggleListToEdit.edit = !toggleListToEdit.edit;
+        nookies.set(null, 'todos', JSON.stringify(state), { path: '/' }); 
       }
 
     },
@@ -53,10 +61,11 @@ const todoSlice = createSlice({
       //     todo.done = ! todo.done;
       //   }
       // });
-
+1
       const toggleListDone = state.find(todo => todo.id === action.payload);
       if(toggleListDone) {
-        toggleListDone.done = !toggleListDone.done
+        toggleListDone.done = !toggleListDone.done;
+        nookies.set(null, 'todos', JSON.stringify(state), { path: '/' }); 
       }
     }
 
